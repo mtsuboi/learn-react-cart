@@ -5,25 +5,6 @@ type Props = {
   unitPrice: number;
 };
 
-const itemNameStyle = {
-  display: 'inline-block',
-  width: '200px',
-};
-
-const unitPriceStyle = {
-  display: 'inline-block',
-  width: '130px',
-};
-
-const quantityStyle = {
-  display: 'inline-block',
-  padding: '0 10px',
-};
-
-const quantityInputStyle = {
-  width: '20px',
-};
-
 export const CartItem: React.FC<Props> = ({ itemName, unitPrice }) => {
   const [quantity, setQuantity] = useState('0');
   const onClickCount = (quantityAdd: number) => {
@@ -42,20 +23,30 @@ export const CartItem: React.FC<Props> = ({ itemName, unitPrice }) => {
   };
 
   return (
-    <div style={{ display: 'flex' }}>
-      <div style={itemNameStyle}>{itemName}</div>
-      <div style={unitPriceStyle}>{unitPrice}円(税込)</div>
-      <button onClick={() => onClickCount(-1)}>－</button>
-      <div style={quantityStyle}>
+    <div className="flex m-2">
+      <div className="inline-block w-48">{itemName}</div>
+      <div className="inline-block w-32">{unitPrice}円(税込)</div>
+      <button
+        className="text-white bg-indigo-500 border-0 px-1 focus:outline-none hover:bg-indigo-600 rounded"
+        onClick={() => onClickCount(-1)}
+      >
+        －
+      </button>
+      <div className="inline-block px-2.5">
         <input
           type="text"
-          style={quantityInputStyle}
+          className="w-8 px-2 rounded border border-gray-300 focus:ring-2"
           value={quantity}
           onChange={onQuantityChange}
         />
         個
       </div>
-      <button onClick={() => onClickCount(1)}>＋</button>
+      <button
+        className="text-white bg-indigo-500 border-0 px-1 focus:outline-none hover:bg-indigo-600 rounded"
+        onClick={() => onClickCount(1)}
+      >
+        ＋
+      </button>
     </div>
   );
 };
