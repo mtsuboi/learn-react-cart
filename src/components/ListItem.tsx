@@ -1,25 +1,26 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent } from 'react';
+import { IListItem } from '../models/IListItem';
 
 type Props = {
-  itemName: string;
-  unitPrice: number;
+  listItem: IListItem;
+  onChange: (itemId: number, quantity: string) => void;
 };
 
-export const CartItem: React.FC<Props> = ({ itemName, unitPrice }) => {
-  const [quantity, setQuantity] = useState('0');
+export const ListItem: React.FC<Props> = ({ listItem, onChange }) => {
+  const { itemId, itemName, unitPrice, quantity } = listItem;
+
+  // +/-クリック時のカウントアップ・ダウン
   const onClickCount = (quantityAdd: number) => {
-    const newQuantity = (quantity ? parseInt(quantity) : 0) + quantityAdd;
+    const newQuantity =
+      (isNaN(parseInt(quantity)) ? 0 : parseInt(quantity)) + quantityAdd;
     if (newQuantity >= 0 && newQuantity <= 9)
-      setQuantity(newQuantity.toString());
+      onChange(itemId, newQuantity.toString());
   };
-  const onQuantityChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (
-      !e.target.value ||
-      (e.target.value.length === 1 &&
-        e.target.value >= '0' &&
-        e.target.value <= '9')
-    )
-      return setQuantity(e.target.value);
+
+  // 数量を入力時のonChangeハンドラー
+  const handlerQuantityChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value === '' || /^\d$/.test(e.target.value))
+      return onChange(itemId, e.target.value);
   };
 
   return (
@@ -35,9 +36,10 @@ export const CartItem: React.FC<Props> = ({ itemName, unitPrice }) => {
       <div className="inline-block px-2.5">
         <input
           type="text"
+          id="quantity"
           className="w-8 px-2 rounded border border-gray-300 focus:ring-2"
           value={quantity}
-          onChange={onQuantityChange}
+          onChange={handlerQuantityChange}
         />
         個
       </div>
