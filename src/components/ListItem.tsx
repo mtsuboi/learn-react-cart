@@ -20,7 +20,7 @@ export const ListItem: React.FC<Props> = ({ listItem, onChange }) => {
   // 数量を入力時のonChangeハンドラー
   const handlerQuantityChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.value === '' || /^\d$/.test(e.target.value))
-      return onChange(itemId, e.target.value);
+      onChange(itemId, e.target.value);
   };
 
   return (
