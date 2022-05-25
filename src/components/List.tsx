@@ -4,7 +4,7 @@ import { IListItem } from '../models/IListItem';
 
 type Props = {
   listItems: IListItem[];
-  onChange: (itemId: number, quantity: string) => void;
+  onChange: (itemId: number, quantity: number) => void;
 };
 
 export const List: React.FC<Props> = ({ listItems, onChange }) => {

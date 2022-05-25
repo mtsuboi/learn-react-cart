@@ -8,18 +8,12 @@ type Props = {
 export const Total: React.FC<Props> = ({ listItems }) => {
   // 合計数量の計算
   const totalQuantity = listItems
-    .map((listItem) =>
-      listItem.quantity === '' ? 0 : parseInt(listItem.quantity)
-    )
+    .map((listItem) => listItem.quantity)
     .reduce((total, current) => total + current);
 
   // 合計金額の計算
   const totalPrice = listItems
-    .map((listItem) =>
-      listItem.quantity === ''
-        ? 0
-        : parseInt(listItem.quantity) * listItem.unitPrice
-    )
+    .map((listItem) => listItem.quantity * listItem.unitPrice)
     .reduce((total, current) => total + current);
 
   return (

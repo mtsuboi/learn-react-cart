@@ -16,13 +16,13 @@ export const App: React.FC = () => {
     );
     return {
       ...item,
-      quantity: (cartItem?.quantity ?? 0).toString(),
+      quantity: cartItem?.quantity ?? 0,
     };
   });
   const [listItems, setListItems] = useState(initialListItems);
 
   // コンポーネントに渡すonChangeハンドラー
-  const handlerQuantityChange = (itemId: number, quantity: string) => {
+  const handlerQuantityChange = (itemId: number, quantity: number) => {
     // 変更したアイテムを更新してステートにセット
     setListItems(
       listItems.map((listItem) =>
