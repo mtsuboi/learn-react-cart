@@ -7,11 +7,13 @@ type Props = {
 };
 
 export const NumberInput: React.FC<Props> = (props) => {
+  console.log('NumberInput');
   const { value, unitStr, setValue } = props;
   const [isBlank, setIsBlank] = useState(false);
 
   // +/-クリック時のカウントアップ・ダウン
   const onClickCount = (addValue: number) => {
+    setIsBlank(false);
     const newValue = value + addValue;
     if (newValue >= 0 && newValue <= 9) setValue(newValue);
   };

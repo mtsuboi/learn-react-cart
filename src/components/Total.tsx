@@ -1,11 +1,10 @@
-import React from 'react';
-import { IListItem } from '../models/IListItem';
+import React, { useContext } from 'react';
+import { CartContext } from '../providers/CartProvider';
 
-type Props = {
-  listItems: IListItem[];
-};
+export const Total: React.FC = () => {
+  console.log('Total');
+  const { listItems } = useContext(CartContext);
 
-export const Total: React.FC<Props> = ({ listItems }) => {
   // 合計数量の計算
   const totalQuantity = listItems
     .map((listItem) => listItem.quantity)
