@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 // path は、パス文字列を操作するための node.js ビルドインのツール
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -31,6 +32,17 @@ module.exports = {
           'style-loader',
           { loader: 'css-loader', options: { importLoaders: 1 } },
           'postcss-loader',
+        ],
+      },
+      {
+        test: /\.(png|jpg|gif)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[path][name].[ext]',
+            },
+          },
         ],
       },
     ],
